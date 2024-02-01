@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Header = () => {
 	return (
 		<div>
@@ -48,11 +50,11 @@ const Header = () => {
 
 						<div className="flex items-center gap-4">
 							<div className="sm:flex sm:gap-4">
-								<a
-									className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow"
-									href="/">
-									Get started
-								</a>
+								<Link href={"/login"}>
+									<span className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white shadow">
+										Get started
+									</span>
+								</Link>
 							</div>
 
 							<div className="block md:hidden">
