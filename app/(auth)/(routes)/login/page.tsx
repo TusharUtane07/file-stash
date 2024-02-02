@@ -6,16 +6,23 @@ import {
 	UserCredential,
 } from "firebase/auth";
 import { auth } from "@/firebase";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
 	const [email, setEmail] = useState<string>("");
 	const [password, setPassword] = useState<string>("");
+
+	const router = useRouter();
 
 	const signInUser = (e: FormEvent) => {
 		e.preventDefault();
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential: UserCredential) => {
 				console.log("Signed In successfully", userCredential);
+			})
+			.then(() => {
+				router.push("/upload");
 			})
 			.catch((error): any => {
 				const errorCode: string = error.code;
@@ -120,9 +127,9 @@ const Login = () => {
 
 						<p className="text-center text-sm text-gray-500">
 							No account?
-							<a className="underline" href="/register">
+							<Link className="underline" href="/register">
 								Sign up
-							</a>
+							</Link>
 						</p>
 					</form>
 				</div>

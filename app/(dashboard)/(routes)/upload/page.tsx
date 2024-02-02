@@ -13,7 +13,7 @@ import { doc, getFirestore, setDoc } from "firebase/firestore";
 
 const Upload: React.FC = () => {
 	const [progress, setProgress] = useState<number>();
-	const [email, setEmail] = useState<string | null>("");
+	const [email, setEmail] = useState<string | any>("");
 
 	const storage = getStorage(app);
 	const db = getFirestore(app);
@@ -57,7 +57,7 @@ const Upload: React.FC = () => {
 	const getLoggedInUserEmail = () => {
 		const user = auth.currentUser;
 		if (user !== null) {
-			setEmail(user.email);
+			setEmail(user?.email);
 			console.log(email);
 		}
 	};
@@ -68,15 +68,14 @@ const Upload: React.FC = () => {
 
 	const saveInfo = async (file: File, fileUrl: string) => {
 		const docId = Date.now().toString();
-		await setDoc(doc(db, "uploadedName", docId), {
-			fileName: file.name,
-			fileSize: file.size,
-			fileType: file.type,
+		await setDoc(doc(db, "uploadedName", email), {
+			fileName: file?.name,
+			fileSize: file?.size,
+			fileType: file?.type,
 			fileUrl: fileUrl,
 			userEmail: email,
+			id: docId,
 			password: "",
-		}).then((res) => {
-			console.log(res);
 		});
 	};
 

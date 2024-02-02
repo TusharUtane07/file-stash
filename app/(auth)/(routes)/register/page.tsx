@@ -7,6 +7,7 @@ import {
 	UserCredential,
 } from "firebase/auth";
 import { auth } from "@/firebase";
+import Link from "next/link";
 
 const page: React.FC = () => {
 	const [email, setEmail] = useState<string>("");
@@ -120,9 +121,9 @@ const page: React.FC = () => {
 
 						<p className="text-center text-sm text-gray-500">
 							No account?
-							<a className="underline" href="/login">
+							<Link className="underline" href="/login">
 								Sign in
-							</a>
+							</Link>
 						</p>
 					</form>
 				</div>
