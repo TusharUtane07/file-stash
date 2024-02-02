@@ -2,16 +2,15 @@ import { initializeApp } from "firebase/app";
 import { Firestore } from "firebase/firestore";
 import { getAuth} from "firebase/auth";
 
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBgOoMVsBLKN3OSTnsQdXp5klzdEUcaJ3k",
-  authDomain: "filesharingapp-3f39f.firebaseapp.com",
-  projectId: "filesharingapp-3f39f",
-  storageBucket: "filesharingapp-3f39f.appspot.com",
-  messagingSenderId: "1067856216309",
-  appId: "1:1067856216309:web:f20b6be75c3b4f60b385bc"
+  apiKey: "AIzaSyBbcaHSV8W4l6OYJ2By0b3aT4zEoj3NG5c",
+  authDomain: "filesharing-ff5f6.firebaseapp.com",
+  projectId: "filesharing-ff5f6",
+  storageBucket: "filesharing-ff5f6.appspot.com",
+  messagingSenderId: "603197109210",
+  appId: "1:603197109210:web:2852764e8cad761cfdc6e3"
 };
-
-
 export const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app)
 // export const db = fire

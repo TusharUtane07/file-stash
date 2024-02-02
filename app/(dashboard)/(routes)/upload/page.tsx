@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import UploadForm from "./_components/UploadForm";
 import {
 	StorageReference,
@@ -8,12 +8,15 @@ import {
 	ref,
 	uploadBytesResumable,
 } from "firebase/storage";
-import { app } from "@/firebase";
+import { app, auth } from "@/firebase";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 
 const Upload: React.FC = () => {
 	const [progress, setProgress] = useState<number>();
+	const [email, setEmail] = useState<string | null>("");
 
 	const storage = getStorage(app);
+	const db = getFirestore(app);
 
 	const uploadFile = (file: File | null) => {
 		if (!file) {
@@ -39,6 +42,7 @@ const Upload: React.FC = () => {
 				progress == 100 &&
 					getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
 						console.log("File is available at ", downloadURL);
+						saveInfo(file, downloadURL);
 					});
 			},
 			(error) => {
@@ -48,6 +52,32 @@ const Upload: React.FC = () => {
 				console.log("Upload complete!");
 			}
 		);
+	};
+
+	const getLoggedInUserEmail = () => {
+		const user = auth.currentUser;
+		if (user !== null) {
+			setEmail(user.email);
+			console.log(email);
+		}
+	};
+
+	useEffect(() => {
+		getLoggedInUserEmail();
+	}, [email]);
+
+	const saveInfo = async (file: File, fileUrl: string) => {
+		const docId = Date.now().toString();
+		await setDoc(doc(db, "uploadedName", docId), {
+			fileName: file.name,
+			fileSize: file.size,
+			fileType: file.type,
+			fileUrl: fileUrl,
+			userEmail: email,
+			password: "",
+		}).then((res) => {
+			console.log(res);
+		});
 	};
 
 	return (
