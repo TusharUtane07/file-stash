@@ -68,7 +68,7 @@ const Upload: React.FC = () => {
 
 	const saveInfo = async (file: File, fileUrl: string) => {
 		const docId = Date.now().toString();
-		await setDoc(doc(db, "uploadedName", email), {
+		await setDoc(doc(db, "uploadedName", docId), {
 			fileName: file?.name,
 			fileSize: file?.size,
 			fileType: file?.type,
