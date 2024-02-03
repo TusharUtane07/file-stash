@@ -17,7 +17,7 @@ const FirePreview = ({ params }: Props) => {
 	const [file, setFile] = useState<any>();
 
 	useEffect(() => {
-		console.log(params?.fileId);
+		// console.log(params?.fileId);
 		params?.fileId && getFileInfo();
 	}, []);
 
@@ -32,18 +32,11 @@ const FirePreview = ({ params }: Props) => {
 		}
 	};
 
-	// const onPasswordSave = async (password: any) => {
-	// 	const docRef = doc(db, "uploadedName", params?.fileId);
-	// 	await updateDoc(docRef, {
-	// 		password: password,
-	// 	});
-	// };
-
 	return (
 		<>
 			<div className="grid lg:grid-cols-2 grid-cols-1 ">
 				<FileInfo file={file} />
-				<ShareForm />
+				<ShareForm file={file} id={params?.fileId} />
 			</div>
 			<Link href={"/upload"}>
 				<div className="w-60 m-auto text-center text-2xl mt-5 flex items-center gap-3 justify-center  rounded-sm cursor-pointer">
