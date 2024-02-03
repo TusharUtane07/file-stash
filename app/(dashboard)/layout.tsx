@@ -2,6 +2,7 @@ import React from "react";
 import SideNav from "./_components/SideNav";
 import TopHeader from "./_components/TopHeader";
 import { Toaster } from "react-hot-toast";
+import BottomFooter from "./_components/BottomFooter";
 
 const layout: React.FC = ({ children }: any) => {
 	return (
@@ -12,6 +13,7 @@ const layout: React.FC = ({ children }: any) => {
 			<div className="md:ml-64 h-full">
 				<TopHeader />
 				{children}
+				<BottomFooter />
 			</div>
 			<Toaster />
 		</div>

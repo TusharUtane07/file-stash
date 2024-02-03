@@ -4,6 +4,8 @@ import { doc, getDoc, getFirestore, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import FileInfo from "../_components/FileInfo";
 import ShareForm from "../_components/ShareForm";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 type Props = {
 	params: any;
@@ -38,10 +40,17 @@ const FirePreview = ({ params }: Props) => {
 	// };
 
 	return (
-		<div className="grid lg:grid-cols-2 grid-cols-1 ">
-			<FileInfo file={file} />
-			<ShareForm />
-		</div>
+		<>
+			<div className="grid lg:grid-cols-2 grid-cols-1 ">
+				<FileInfo file={file} />
+				<ShareForm />
+			</div>
+			<Link href={"/upload"}>
+				<div className="w-60 m-auto text-center text-2xl mt-5 flex items-center gap-3 justify-center  rounded-sm cursor-pointer">
+					<ArrowLeft /> Go to upload
+				</div>
+			</Link>
+		</>
 	);
 };
 
