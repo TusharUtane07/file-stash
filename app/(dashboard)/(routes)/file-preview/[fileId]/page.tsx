@@ -38,8 +38,8 @@ const FirePreview = ({ params }: Props) => {
 	// };
 
 	return (
-		<div className="grid lg:grid-cols-2 grid-cols-1">
-			<FileInfo />
+		<div className="grid lg:grid-cols-2 grid-cols-1 ">
+			<FileInfo file={file} />
 			<ShareForm />
 		</div>
 	);

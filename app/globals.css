@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.heightCheck {
+	height: calc(100vh - 64px);
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
