@@ -1,6 +1,7 @@
 import React from "react";
 import SideNav from "./_components/SideNav";
 import TopHeader from "./_components/TopHeader";
+import { Toaster } from "react-hot-toast";
 
 const layout: React.FC = ({ children }: any) => {
 	return (
@@ -12,6 +13,7 @@ const layout: React.FC = ({ children }: any) => {
 				<TopHeader />
 				{children}
 			</div>
+			<Toaster />
 		</div>
 	);
 };

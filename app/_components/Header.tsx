@@ -30,7 +30,7 @@ const Header = () => {
 									<li>
 										<a
 											className="text-gray-500 transition hover:text-gray-500/75"
-											href="/">
+											href="/login">
 											{" "}
 											About us{" "}
 										</a>
@@ -39,7 +39,7 @@ const Header = () => {
 									<li>
 										<a
 											className="text-gray-500 transition hover:text-gray-500/75"
-											href="/">
+											href="/login">
 											{" "}
 											Contact us{" "}
 										</a>

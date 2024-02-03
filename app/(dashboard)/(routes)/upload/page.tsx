@@ -10,13 +10,19 @@ import {
 } from "firebase/storage";
 import { app, auth } from "@/firebase";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Upload: React.FC = () => {
 	const [progress, setProgress] = useState<number>();
 	const [email, setEmail] = useState<string | any>("");
+	const [documentId, setDocumentId] = useState<string>();
 
 	const storage = getStorage(app);
 	const db = getFirestore(app);
+
+	const router = useRouter();
 
 	const uploadFile = (file: File | null) => {
 		if (!file) {
@@ -58,12 +64,18 @@ const Upload: React.FC = () => {
 		const user = auth.currentUser;
 		if (user !== null) {
 			setEmail(user?.email);
-			console.log(email);
 		}
 	};
 
 	useEffect(() => {
 		getLoggedInUserEmail();
+
+		onAuthStateChanged(auth, (user: any) => {
+			if (user) {
+			} else {
+				router.push("/login");
+			}
+		});
 	}, [email]);
 
 	const saveInfo = async (file: File, fileUrl: string) => {
@@ -77,20 +89,25 @@ const Upload: React.FC = () => {
 			id: docId,
 			password: "",
 		});
+		toast.success("File Uploaded Successfully");
+		router.push("/file-preview/" + docId);
 	};
 
 	return (
-		<div className="p-5 px-8 md:px-28">
-			<h2 className="text-[20px] text-center m-5 ">
-				Start <strong className="text-primary">Uploading</strong> Files &{" "}
-				<strong className="text-primary ">Share</strong>
-				them
-			</h2>
-			<UploadForm
-				uploadButtonClick={(file: File | null) => uploadFile(file)}
-				progress={progress}
-			/>
-		</div>
+		<>
+			<div className="p-5 px-8 md:px-28">
+				<h2 className="text-[20px] text-center m-5 ">
+					Start <strong className="text-primary">Uploading</strong> Files &{" "}
+					<strong className="text-primary ">Share</strong>
+					them
+				</h2>
+				<UploadForm
+					uploadButtonClick={(file: File | null) => uploadFile(file)}
+					progress={progress}
+				/>
+			</div>
+			<Toaster />
+		</>
 	);
 };
 
