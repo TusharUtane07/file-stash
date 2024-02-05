@@ -7,7 +7,7 @@ type Props = {
 
 const FileInfo = ({ file }: Props) => {
 	return (
-		<div className="border-2 border-black/10 m-5 flex flex-col items-center">
+		<div className=" m-5 flex flex-col items-center">
 			{file?.fileUrl ? (
 				<>
 					<Image
